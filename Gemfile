@@ -8,6 +8,8 @@ gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'figaro'
+gem 'geocoder'
+gem 'gmaps4rails'
 
 group :production do
   gem 'rails_12factor'

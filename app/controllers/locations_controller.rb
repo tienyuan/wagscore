@@ -3,6 +3,11 @@ class LocationsController < ApplicationController
 
   def index
     @locations = Location.all.publicly_viewable
+    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+      marker.lat location.latitude
+      marker.lng location.longitude
+      marker.title location.name
+    end
   end
 
   def show
