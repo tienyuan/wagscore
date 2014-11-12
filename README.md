@@ -7,7 +7,7 @@ We're also going to show you the *wagscore*, how friendly the ares is for dogs.
 
 Made with my mentor at Bloc.
 
-Visit a working copy at [tienyuan-wagscore](http://tienyuan-wagscore.herokuapp.com/)
+Visit a working copy at [wagscore](http://wagscore.herokuapp.com/)
 
 
 Setup Instructions
