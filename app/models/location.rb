@@ -1,4 +1,7 @@
 class Location < ActiveRecord::Base
+  has_many :categorizations
+  has_many :categories, through: :categorizations
+
   validates :name, presence: true
   validates :address, presence: true
 

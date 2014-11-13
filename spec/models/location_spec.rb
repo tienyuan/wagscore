@@ -25,4 +25,13 @@ RSpec.describe Location do
     it { expect(@location).to validate_presence_of(:name).with_message( /can't be blank/ ) }
     it { expect(@location).to validate_presence_of(:address).with_message( /can't be blank/ ) }
   end
+
+  describe "ActiveRecord associations" do
+    before do
+      @location = create(:location)
+    end
+    
+    it { expect(@location).to have_many(:categorizations) }
+    it { expect(@location).to have_many(:categories) }
+  end
 end
