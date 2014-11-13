@@ -9,7 +9,6 @@ feature "Visitor goes to list", :type => :feature do
   end
 
   scenario "as a visitor, sees public locations" do
-    
     visit root_path
     expect(page).to have_content(@public_location.name)
     expect(page).to have_content(@public_location.description)

@@ -20,6 +20,11 @@
     <%= @location.address %><br>
     <%= @location.city %>, <%= @location.state %> <%= @location.zipcode %><br>
   </address>
+  <% if !@location.flagged %>
+    <%= link_to 'Flag', location_path(id: @location.id, location:{flagged: true}), title: "Flag complete", method: :put %>
+  <% else %>
+    Flagged for review
+  <% end %>
   <%= link_to 'Edit', edit_location_path(@location) %>
 </p>
 <br/>

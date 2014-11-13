@@ -37,7 +37,7 @@ class LocationsController < ApplicationController
   end
 
   def update
-    if @location.update(location_params)
+    if @location.update(location_params) 
       redirect_to @location, notice: 'Location was successfully updated.'
     else
       flash[:error] = "Location edit failed. Please try again."
@@ -51,11 +51,11 @@ class LocationsController < ApplicationController
   end
 
   private
-    def set_location
-      @location = Location.find(params[:id])
-    end
+  def set_location
+    @location = Location.find(params[:id])
+  end
 
-    def location_params
-      params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :public, :flagged)
-    end
+  def location_params
+    params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :public, :flagged)
+  end
 end
