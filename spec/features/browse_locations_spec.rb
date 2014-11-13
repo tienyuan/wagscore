@@ -8,7 +8,7 @@ feature "Visitor goes to list", :type => :feature do
     @private_location = create(:location)
   end
 
-  scenario "as a visitor, sees public wikis" do
+  scenario "as a visitor, sees public locations" do
     
     visit root_path
     expect(page).to have_content(@public_location.name)

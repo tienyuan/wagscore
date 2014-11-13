@@ -107,7 +107,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(@location.name).to eq('new name')
     end
 
-    it "fails without a title" do
+    it "fails without a name" do
       invalid_name = ""
       patch :update, id: @location.id, location:{name: invalid_name}
 
