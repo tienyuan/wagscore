@@ -2,8 +2,12 @@ class Location < ActiveRecord::Base
   validates :name, presence: true
   validates :address, presence: true
 
-  geocoded_by :address
-  after_validation :geocode, :if => :address_changed?
+  geocoded_by :full_address
+  after_validation :geocode if :address.present? && :address_changed?
 
   scope :publicly_viewable, -> { where(public: true) }
+
+  def full_address
+    [address, city, state, zipcode].compact.join(', ')
+  end
 end
