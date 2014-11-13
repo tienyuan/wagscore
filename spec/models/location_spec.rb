@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Location do 
 
+  before do
+    allow_any_instance_of(Location).to receive(:geocode).and_return([1,1]) 
+  end
+
   describe "publicly_viewable" do
     before do
       @public_location = create(:location, public: true)

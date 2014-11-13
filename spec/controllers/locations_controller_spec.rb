@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe LocationsController, :type => :controller do
 
+  before do
+    allow_any_instance_of(Location).to receive(:geocode).and_return([1,1]) 
+  end
+
   describe "#index" do
     render_views
 

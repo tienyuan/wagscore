@@ -3,6 +3,7 @@ require 'rails_helper'
 feature "Visitor goes to list", :type => :feature do
 
   before do
+    allow_any_instance_of(Location).to receive(:geocode).and_return([1,1])
     @public_location = create(:location, public: true)
     @private_location = create(:location)
   end
