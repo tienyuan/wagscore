@@ -47,13 +47,8 @@
     <%= f.label :flagged %><br>
     <%= f.check_box :flagged %>
   </div>
-  <div class="field">
-    <%= f.label :latitude %><br>
-    <%= f.text_field :latitude %>
-  </div>
-  <div class="field">
-    <%= f.label :longitude %><br>
-    <%= f.text_field :longitude %>
+  <div>
+    <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
   </div>
   <div class="actions">
     <%= f.submit %>
