@@ -7,6 +7,9 @@
       <% @location.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
+      <% @submission.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
       </ul>
     </div>
   <% end %>
@@ -47,9 +50,16 @@
     <%= f.label :flagged %><br>
     <%= f.check_box :flagged %>
   </div> -->
-  <div>
+  <div class="field">
     <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
   </div>
+  <%= fields_for(:submission) do |s| %>
+    <div class="field">
+      <%= s.label :email %><br>
+      <%= s.text_field :email %>
+    </div>
+    
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

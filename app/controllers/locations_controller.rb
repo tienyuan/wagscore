@@ -20,12 +20,14 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
+    @location.build_submission
   end
 
   def create
-    @location = Location.new(location_params)
-
-    if @location.save
+    @location = Location.new(new_location_params)
+    @submission = @location.build_submission(submission_params)
+    
+    if @location.save && @submission.save
       redirect_to root_path, notice: 'Location successfully submitted.'
     else
       flash[:error] = "Location submission failed. Please try again."
@@ -37,7 +39,7 @@ class LocationsController < ApplicationController
   end
 
   def update
-    if @location.update(location_params) 
+    if @location.update(current_location_params) 
       redirect_to @location, notice: 'Location was successfully updated.'
     else
       flash[:error] = "Location edit failed. Please try again."
@@ -55,7 +57,15 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
   end
 
-  def location_params
+  def submission_params
+    params.require(:submission).permit(:email)
+  end
+
+  def new_location_params
+    params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :flagged, :category_ids => [])
+  end
+
+  def current_location_params
     params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :public, :flagged, :category_ids => [])
   end
 end

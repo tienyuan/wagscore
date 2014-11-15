@@ -18,12 +18,13 @@ feature "Visitor creates a location", :type => :feature do
     fill_in 'City', with: "Metropolis"
     fill_in 'State', with: "CA"
     fill_in 'Zipcode', with: "12345"
+    fill_in 'Email', with: "test@email.com"
     within 'form' do
       click_button 'Create Location'
     end
-      
+
+    # expect(current_path).to eq(root_path)      
     expect(page).to have_content('Location successfully submitted.')
-    expect(current_path).to eq(root_path)
     expect(Location.last.name).to eq('Dog Vet')
     expect(Location.last.description).to eq('We treat dogs')
     expect(Location.last.url).to eq('vet.com')
@@ -31,5 +32,9 @@ feature "Visitor creates a location", :type => :feature do
     expect(Location.last.city).to eq('Metropolis')
     expect(Location.last.state).to eq('CA')
     expect(Location.last.zipcode).to eq('12345')
+    expect(Location.last.public).to eq false
+    # expect(Submission.last.ip_address). to eq()
+    expect(Submission.last.email). to eq('test@email.com')
+    expect(Submission.last.location). to eq(Location.last)
   end
 end
