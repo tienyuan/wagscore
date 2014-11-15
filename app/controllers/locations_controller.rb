@@ -25,10 +25,10 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(new_location_params)
-    @submission = @location.build_submission(submission_params)
-    @submission.ip_address = request.remote_ip
+    @location.build_submission(submission_params)
+    @location.submission.ip_address = request.remote_ip
 
-    if @location.save && @submission.save
+    if @location.save
       redirect_to root_path, notice: 'Location successfully submitted.'
     else
       flash[:error] = "Location submission failed. Please try again."
