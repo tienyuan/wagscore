@@ -28,7 +28,11 @@
   <%= link_to 'Edit', edit_location_path(@location) %>
   <%= link_to 'Destroy', @location, method: :delete, data: { confirm: 'Are you sure?' } %>
 </p>
-<%= @location.categories %><br/>
+<% @location.categories.each do |category| %>
+  <%= category.name %><br/>
+<% end %>
+
+<br/>
 
 <br/>
 

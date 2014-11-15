@@ -24,7 +24,7 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new(new_location_params)
+    @location = Location.new(location_params)
     @location.build_submission(submission_params)
     @location.submission.ip_address = request.remote_ip
 
@@ -40,7 +40,7 @@ class LocationsController < ApplicationController
   end
 
   def update
-    if @location.update(current_location_params) 
+    if @location.update(location_params) 
       redirect_to @location, notice: 'Location was successfully updated.'
     else
       flash[:error] = "Location edit failed. Please try again."
@@ -62,11 +62,7 @@ class LocationsController < ApplicationController
     params.require(:submission).permit(:email)
   end
 
-  def new_location_params
-    params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :flagged, :category_ids => [])
-  end
-
-  def current_location_params
+  def location_params
     params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :public, :flagged, :category_ids => [])
   end
 end
