@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Category do
+RSpec.describe Category, :type => :model do
   
   describe "ActiveModel validations" do
     before do

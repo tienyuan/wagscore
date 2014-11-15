@@ -26,7 +26,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
 
     if @location.save
-      redirect_to @location, notice: 'Location successfully submitted.'
+      redirect_to root_path, notice: 'Location successfully submitted.'
     else
       flash[:error] = "Location submission failed. Please try again."
       render :new

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Categorization do
+RSpec.describe Categorization, :type => :model do
   
   describe "class methods" do
     before do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Location do 
+RSpec.describe Location, :type => :model do 
 
   before do
     allow_any_instance_of(Location).to receive(:geocode).and_return([1,1]) 
@@ -33,5 +33,6 @@ RSpec.describe Location do
     
     it { expect(@location).to have_many(:categorizations) }
     it { expect(@location).to have_many(:categories) }
+    it { expect(@location).to have_one(:submission) }    
   end
 end
