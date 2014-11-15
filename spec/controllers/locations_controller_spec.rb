@@ -58,7 +58,7 @@ RSpec.describe LocationsController, :type => :controller do
 
   describe "#create" do
     it "creates a new location with valid info" do
-      params = {location: {name: 'name', description: 'description', address: 'address', url: 'url', city: 'city', state: 'state', zipcode: '12345'}}
+      params = {location: {name: 'name', description: 'description', address: 'address', url: 'url', city: 'city', state: 'state', zipcode: '12345'}, submission: {email: 'test@email.com', ip_address: '0.0.0.0'}}
       post :create, params
 
       expect(response).to be_redirect
@@ -67,7 +67,7 @@ RSpec.describe LocationsController, :type => :controller do
     end
   
     it "fails with a blank name" do
-      params = {location: {name: '', description: 'description', address: 'address', url: 'url', city: 'city', state: 'state', zipcode: '12345'}}
+      params = {location: {name: '', description: 'description', address: 'address', url: 'url', city: 'city', state: 'state', zipcode: '12345'}, submission: {email: 'test@email.com', ip_address: '0.0.0.0'}}
       post :create, params
 
       expect(response).to have_http_status(:success)
@@ -75,7 +75,15 @@ RSpec.describe LocationsController, :type => :controller do
     end
 
     it "fails with a blank address" do
-      params = {location: {name: 'name', description: 'description', address: '', url: 'url', city: 'city', state: 'state', zipcode: '12345'}}
+      params = {location: {name: 'name', description: 'description', address: '', url: 'url', city: 'city', state: 'state', zipcode: '12345'}, submission: {email: 'test@email.com', ip_address: '0.0.0.0'}}
+      post :create, params
+
+      expect(response).to have_http_status(:success)
+      expect(flash[:error]).to eq "Location submission failed. Please try again."
+    end
+
+    it "fails with a blank email" do
+      params = {location: {name: 'name', description: 'description', address: 'address', url: 'url', city: 'city', state: 'state', zipcode: '12345'}, submission: {email: '', ip_address: '0.0.0.0'}}
       post :create, params
 
       expect(response).to have_http_status(:success)
