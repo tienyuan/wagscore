@@ -16,7 +16,7 @@ class LocationsController < ApplicationController
       end
     else
       flash[:error] = "No locations found. Please try again."
-      redirect_to root_path
+      # redirect_to root_path
     end
   end
 
