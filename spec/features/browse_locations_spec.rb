@@ -26,4 +26,16 @@ feature "Visitor goes to list", :type => :feature do
     expect(page).not_to have_content(@public_location.latitude)
     expect(page).not_to have_content(@public_location.longitude)
   end
+
+  xscenario "as a visitor, searches for public locations near a place" do
+    @other_location = create(:location, latitude: '20', longitude: '20', public: true)
+    
+    visit root_path
+    fill_in 'search_location', with: "90210"
+    within 'form' do
+      click_button 'Search'
+    end
+    expect(page).to have_content(@public_location.name)
+    expect(page).not_to have_content(@other_location.name)
+  end
 end

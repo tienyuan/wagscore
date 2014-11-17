@@ -2,8 +2,8 @@
 <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" type="text/javascript"></script>
 
 <%= form_tag locations_path, method: :get do %>
-  <%= label :location, "Search locations near: " %>
-  <%= text_field_tag :search_location, params[:search_location] %>
+  <%= label :search_location, "Search locations near: " %>
+  <%= text_field_tag :search_location, params[:search_location], placeholder: "Place, Address, Intersection or Zip" %>
 
   <%= label :distance, "Distance: " %>
   <%= select_tag :distance, options_for_select([["1 mi", 1], ["2 mi", 2], ["5 mi", 5], ["10 mi", 10]]) %>
