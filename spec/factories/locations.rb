@@ -11,6 +11,5 @@ FactoryGirl.define do
     flagged false
     latitude "34.0711181"
     longitude "-118.3997601"
-    submission {}
   end
 end

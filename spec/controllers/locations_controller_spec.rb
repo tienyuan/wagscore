@@ -107,12 +107,19 @@ RSpec.describe LocationsController, :type => :controller do
   end
 
   describe "#edit" do
-    it "shows location edit form" do
+    render_views
+
+    it "shows location edit form", focus: true do
       location = create(:location)
+      submission = create(:submission, location: location)
       get :edit, {id: location.id}
 
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:edit)
+      expect(response.body).to include location.latitude.to_s
+      expect(response.body).to include location.longitude.to_s
+      expect(response.body).to include location.submission.email
+      expect(response.body).to include location.submission.ip_address
     end
   end
 
