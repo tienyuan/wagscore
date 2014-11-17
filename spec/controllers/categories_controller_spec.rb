@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe CategoriesController, :type => :controller do
 
+  include Devise::TestHelpers
+
   describe "#index" do
     render_views
 

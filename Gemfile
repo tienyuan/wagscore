@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'figaro'
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'devise'
 
 group :production do
   gem 'rails_12factor'
@@ -28,6 +29,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'email_spec', '~> 1.6.0'
 end
 
 # Use jquery as the JavaScript library

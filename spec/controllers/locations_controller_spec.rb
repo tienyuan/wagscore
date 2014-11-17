@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe LocationsController, :type => :controller do
 
+  include Devise::TestHelpers
+
   before do
     allow_any_instance_of(Location).to receive(:geocode).and_return([1,1]) 
   end

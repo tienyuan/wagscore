@@ -20,6 +20,13 @@
           <li>  
             <%= link_to 'About', about_path %>
           </li>
+          <% if current_user %>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                Sign Out
+              <% end %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>
