@@ -3,17 +3,21 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all.sort_asc
+    authorize @categories
   end
 
   def new
     @category = Category.new
+    authorize @category
   end
 
   def edit
+    authorize @category
   end
 
   def create
     @category = Category.new(category_params)
+    authorize @category
 
     if @category.save
       redirect_to categories_path, notice: 'Category was successfully created.'
@@ -24,6 +28,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    authorize @category
     if @category.update(category_params)
       redirect_to @category, notice: 'Category was successfully updated.'
     else
@@ -33,6 +38,8 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    authorize @category
+
     @category.destroy
     redirect_to categories_url, notice: 'Category was successfully deleted.'
   end

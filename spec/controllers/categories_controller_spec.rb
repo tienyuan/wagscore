@@ -4,6 +4,11 @@ RSpec.describe CategoriesController, :type => :controller do
 
   include Devise::TestHelpers
 
+  before do
+    @admin = create(:user, admin: true)
+    sign_in @admin
+  end
+
   describe "#index" do
     render_views
 

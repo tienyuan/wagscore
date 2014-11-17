@@ -11,6 +11,7 @@ gem 'figaro'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'devise'
+gem 'pundit'
 
 group :production do
   gem 'rails_12factor'

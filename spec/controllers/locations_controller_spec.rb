@@ -80,7 +80,7 @@ RSpec.describe LocationsController, :type => :controller do
 
       expect(response).to be_redirect
       expect(Location.last.name).to eq('name')
-      expect(flash[:notice]).to eq "Location successfully submitted."
+      expect(flash[:notice]).to eq "Location successfully submitted. We will review and post it soon!"
     end
   
     it "fails with a blank name" do
@@ -159,6 +159,8 @@ RSpec.describe LocationsController, :type => :controller do
   describe "#destroy" do
     it "destroys the requested location" do
       location = create(:location)
+      @admin = create(:user, admin: true)
+      sign_in @admin
       delete :destroy, id: location.id
 
       expect(response).to be_redirect
