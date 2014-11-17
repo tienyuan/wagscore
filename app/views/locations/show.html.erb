@@ -20,6 +20,9 @@
     <%= @location.address %><br>
     <%= @location.city %>, <%= @location.state %> <%= @location.zipcode %><br>
   </address>
+  <% @location.categories.each do |category| %>
+    <%= category.name %><br/>
+  <% end %>
   <% if !@location.flagged %>
     <%= link_to 'Flag', location_path(id: @location.id, location:{flagged: true}), title: "Flag complete", method: :put %>
   <% else %>
@@ -28,12 +31,11 @@
   <%= link_to 'Edit', edit_location_path(@location) %>
   <%= link_to 'Destroy', @location, method: :delete, data: { confirm: 'Are you sure?' } %>
 </p>
-<% @location.categories.each do |category| %>
-  <%= category.name %><br/>
-<% end %>
-
 <br/>
-
+Nearby locations:<br/>
+<% @location.nearbys(10).each do |nearby_location| %>
+  <%= link_to nearby_location.name, nearby_location %><br/>
+<% end %>
 <br/>
 
 <div style='width: 960px;'>

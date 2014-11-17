@@ -22,13 +22,30 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).not_to include private_location.name 
       expect(response.body).not_to include private_location.description 
     end
+
+    it "shows only public locations near a search location" do
+      public_location = create(:location, public: true)
+      private_location = create(:location)
+
+      params = {search_location: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
+      get :index, params
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:index)
+      expect(Location.count).to eq(2)
+      expect(response.body).to include public_location.name 
+      expect(response.body).to include public_location.description
+      expect(response.body).not_to include private_location.name 
+      expect(response.body).not_to include private_location.description 
+    end
   end
 
   describe "#show" do
     render_views
 
-    it "shows a valid location" do
+    it "shows a valid location and nearby locations" do
       location = create(:location, public: true)
+      near_location = create(:location, public: true)
+      far_location = create(:location, latitude: '20', longitude: "20", public: true)
 
       get :show, {id: location.id}
       expect(response).to have_http_status(:success)
@@ -40,10 +57,8 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include location.city
       expect(response.body).to include location.state
       expect(response.body).to include location.zipcode
-      # expect(response.body).not_to include location.public.to_s
-      # expect(response.body).not_to include location.flagged.to_s
-      # expect(response.body).not_to include location.latitude
-      # expect(response.body).not_to include location.longitude
+      expect(response.body).to include near_location.name
+      expect(response.body).not_to include far_location.name
     end
   end
 

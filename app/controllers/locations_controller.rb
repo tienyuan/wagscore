@@ -2,15 +2,26 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   def index
-    @locations = Location.all.publicly_viewable
-    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
-      marker.lat location.latitude
-      marker.lng location.longitude
-      marker.title location.name
+    if params[:search_location].present?
+      @locations = Location.near(params[:search_location], params[:distance]).publicly_viewable
+    else
+      @locations = Location.all.publicly_viewable
+    end
+   
+    if !@locations.empty?
+      @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+        marker.lat location.latitude
+        marker.lng location.longitude
+        marker.title location.name
+      end
+    else
+      flash[:error] = "No locations found. Please try again."
+      redirect_to root_path
     end
   end
 
   def show
+    @nearby_locations = @location.nearbys(10)
     @hash = Gmaps4rails.build_markers(@location) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
