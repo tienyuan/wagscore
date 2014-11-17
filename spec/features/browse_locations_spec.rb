@@ -3,7 +3,21 @@ require 'rails_helper'
 feature "Visitor goes to list", :type => :feature do
 
   before do
-    allow_any_instance_of(Location).to receive(:geocode).and_return([1,1])
+    #allow_any_instance_of(Location).to receive(:geocode).and_return([1,1])
+    Geocoder.configure(:lookup => :test)
+    Geocoder::Lookup::Test.set_default_stub(
+  [
+    {
+      'latitude'     => 40.7143528,
+      'longitude'    => -74.0059731,
+      'address'      => 'New York, NY, USA',
+      'state'        => 'New York',
+      'state_code'   => 'NY',
+      'country'      => 'United States',
+      'country_code' => 'US'
+    }
+  ]
+)
     @public_location = create(:location, public: true)
     @private_location = create(:location)
   end
@@ -31,10 +45,11 @@ feature "Visitor goes to list", :type => :feature do
     @other_location = create(:location, latitude: '20', longitude: '20', public: true)
     
     visit root_path
-    fill_in 'search_location', with: "90210"
+    fill_in 'search_location', with: "455 N Rexford Dr, Beverly Hills, 90210"
     within 'form' do
       click_button 'Search'
     end
+    puts page.body
     expect(page).to have_content(@public_location.name)
     expect(page).not_to have_content(@other_location.name)
   end

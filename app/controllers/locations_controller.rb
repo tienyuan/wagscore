@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
 
   def index
     if params[:search_location].present?
-      @locations = Location.near(params[:search_location], params[:distance]).publicly_viewable
+      @locations = Location.near(params[:search_location], params[:distance] || 10).publicly_viewable
     else
       @locations = Location.all.publicly_viewable
     end
