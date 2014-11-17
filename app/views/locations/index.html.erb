@@ -23,8 +23,10 @@
           <div class="caption">
             <h3><%= link_to location.name, location %></h3>
             <p><%= location.description %></p> 
-            <%= link_to 'Edit', edit_location_path(location) %> /
-            <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% if current_user && current_user.admin %>
+              <%= link_to 'Edit', edit_location_path(location) %> /
+              <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
           </div>
         </div>
       </div>
