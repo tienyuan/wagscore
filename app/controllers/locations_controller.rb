@@ -14,9 +14,8 @@ class LocationsController < ApplicationController
         marker.lng location.longitude
         marker.title location.name
       end
-    else
-      flash[:error] = "No locations found. Please try again."
-      # redirect_to root_path
+    elsif params[:search_location].present? && @locations.empty?
+      redirect_to root_path, error: 'No locations found. Please try again.'
     end
   end
 
