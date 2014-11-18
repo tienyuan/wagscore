@@ -3,7 +3,6 @@ require 'rails_helper'
 feature "Visitor goes to a location", :type => :feature do
 
   before do
-    allow_any_instance_of(Location).to receive(:geocode).and_return([1,1])
     @location = create(:location, public: true)
   end
 

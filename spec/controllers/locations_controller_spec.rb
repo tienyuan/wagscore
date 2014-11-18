@@ -4,10 +4,6 @@ RSpec.describe LocationsController, :type => :controller do
 
   include Devise::TestHelpers
 
-  before do
-    allow_any_instance_of(Location).to receive(:geocode).and_return([1,1]) 
-  end
-
   describe "#index" do
     render_views
 
@@ -44,10 +40,9 @@ RSpec.describe LocationsController, :type => :controller do
   describe "#show" do
     render_views
 
-    it "shows a valid location and nearby locations" do
+    it "shows a valid location and nearby locations", focus: true do
       location = create(:location, public: true)
       near_location = create(:location, public: true)
-      far_location = create(:location, latitude: '20', longitude: "20", public: true)
 
       get :show, {id: location.id}
       expect(response).to have_http_status(:success)
@@ -60,7 +55,6 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include location.state
       expect(response.body).to include location.zipcode
       expect(response.body).to include near_location.name
-      expect(response.body).not_to include far_location.name
     end
   end
 

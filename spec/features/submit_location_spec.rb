@@ -2,10 +2,6 @@ require 'rails_helper'
 
 feature "Visitor creates a location", :type => :feature do
 
-  before do
-    allow_any_instance_of(Location).to receive(:geocode).and_return([1,1])
-  end
-
   scenario "with valid info" do
     visit root_path
     click_link "Submit a Location"
@@ -37,6 +33,5 @@ feature "Visitor creates a location", :type => :feature do
     expect(Submission.last.ip_address). to eq('127.0.0.1') 
     expect(Submission.last.email). to eq('test@email.com')
     expect(Submission.last.location). to eq(Location.last)
-
   end
 end

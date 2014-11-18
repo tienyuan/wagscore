@@ -3,7 +3,6 @@ require 'rails_helper'
 feature "Admin edits a location", :type => :feature do
 
   before do
-    allow_any_instance_of(Location).to receive(:geocode).and_return([1,1])
     @user = create(:user, admin: true)
     @location = create(:location, public: true)
     @submission = create(:submission, location: @location)

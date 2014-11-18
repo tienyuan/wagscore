@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Submission, :type => :model do
 
   before do
-      allow_any_instance_of(Location).to receive(:geocode).and_return([1,1]) 
       @submission = create(:submission)
     end
 
