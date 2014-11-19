@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "Visitor goes to a location", :type => :feature, js: true do
 
-  xscenario "flags location for review" do
+  scenario "flags location for review" do
     @location = create(:location, public: true)
 
     visit root_path

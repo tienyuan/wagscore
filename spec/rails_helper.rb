@@ -6,10 +6,10 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'shoulda/matchers'
 require 'capybara/rails'
-require "capybara/rspec"
-require "capybara/poltergeist"
+require 'capybara/rspec'
+require 'capybara/poltergeist'
 require 'email_spec'
-require "pundit/rspec"
+require 'pundit/rspec'
 
 Capybara.javascript_driver = :poltergeist
 # Requires supporting ruby files with custom matchers and macros, etc, in
