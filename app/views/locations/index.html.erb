@@ -12,6 +12,11 @@
   <%= link_to "Clear Search", root_path %>
 <% end %>
 
+<div id="panel" >
+  <input id="address" type="textbox" value="Sydney, NSW">
+  <input type="button" value="Geocode" onclick="codeAddress()">
+</div>
+
 <div style='width: 960px;'>
   <div id="map" style='width: 960px; height: 400px;'></div>
 </div>
@@ -42,4 +47,6 @@
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
   });
+
+ initialize();
 </script>
