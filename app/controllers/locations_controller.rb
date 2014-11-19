@@ -73,6 +73,7 @@ class LocationsController < ApplicationController
 
   def flag_location
     @location = Location.find(params[:location_id])
+    authorize @location
     if @location.update_attributes!(flagged: true)
       respond_with(@location) do |format|
         format.json { redirect_to @location }

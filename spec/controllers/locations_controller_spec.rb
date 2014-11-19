@@ -108,6 +108,8 @@ RSpec.describe LocationsController, :type => :controller do
     it "shows location edit form" do
       location = create(:location)
       submission = create(:submission, location: location)
+      user = create(:user, admin: true)
+      sign_in user
       get :edit, {id: location.id}
 
       expect(response).to have_http_status(:success)
@@ -122,6 +124,8 @@ RSpec.describe LocationsController, :type => :controller do
   describe "#update" do
     before do
       @location = create(:location, name: 'old name')
+      user = create(:user, admin: true)
+      sign_in user
     end
 
     it "updates with valid info" do
@@ -150,7 +154,7 @@ RSpec.describe LocationsController, :type => :controller do
     end
   end
 
-  describe "#flag_location", focus: true do
+  describe "#flag_location" do
     before do
       @location = create(:location, flagged: false)
     end

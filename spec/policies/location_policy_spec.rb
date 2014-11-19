@@ -11,12 +11,10 @@ describe LocationPolicy do
   end
 
   permissions :update? do
-    xit "denies access if user is not an admin" do
+    it "denies access if user is not an admin" do
       expect(subject).not_to permit(@user, @public_location)
       expect(subject).not_to permit(@user, @private_location)      
     end
-
-    #currently update is used by flagging and updating using the edit form. Anyone can flag but only the admin should edit.
 
     it "grants access to public and private locations if user is admin" do
       expect(subject).to permit(@admin, @public_location)

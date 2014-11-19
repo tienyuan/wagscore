@@ -11,8 +11,12 @@ class LocationPolicy < ApplicationPolicy
     true
   end
 
+  def flag_location?
+    true
+  end
+
   def update?
-    true #user.present? && user.admin?
+    user.present? && user.admin?
   end
 
   def destroy?
