@@ -40,7 +40,7 @@ RSpec.describe LocationsController, :type => :controller do
   describe "#show" do
     render_views
 
-    it "shows a valid location and nearby locations", focus: true do
+    it "shows a valid location and nearby locations" do
       location = create(:location, public: true)
       near_location = create(:location, public: true)
 
@@ -105,7 +105,7 @@ RSpec.describe LocationsController, :type => :controller do
   describe "#edit" do
     render_views
 
-    it "shows location edit form", focus: true do
+    it "shows location edit form" do
       location = create(:location)
       submission = create(:submission, location: location)
       get :edit, {id: location.id}
@@ -147,6 +147,21 @@ RSpec.describe LocationsController, :type => :controller do
 
       expect(response).to have_http_status(:success)
       expect(flash[:error]).to eq "Location edit failed. Please try again."
+    end
+  end
+
+  describe "#flag_location", focus: true do
+    before do
+      @location = create(:location, flagged: false)
+    end
+
+    it "updates with valid info" do
+      expect(@location.flagged).to be false
+      patch :flag_location, location_id: @location.id
+      @location.reload
+
+      expect(response).to be_redirect
+      expect(@location.flagged).to be true
     end
   end
 

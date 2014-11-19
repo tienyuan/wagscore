@@ -23,11 +23,13 @@
   <% @location.categories.each do |category| %>
     <%= category.name %><br/>
   <% end %>
+  <div id="flag-status">
   <% if !@location.flagged %>
-    <%= link_to 'Flag', location_path(id: @location.id, location:{flagged: true}), title: "Flag complete", method: :put %>
+    <%= link_to 'Flag', location_location_flagged_path(location_id: @location.id), method: :post, remote: true %>
   <% else %>
     Flagged for review
   <% end %>
+  </div>
   <% if current_user && current_user.admin %>
     <%= link_to 'Edit', edit_location_path(@location) %>
     <%= link_to 'Destroy', @location, method: :delete, data: { confirm: 'Are you sure?' } %>

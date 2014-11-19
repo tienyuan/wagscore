@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Visitor goes to a location", :type => :feature do
+feature "Visitor goes to a location", :type => :feature, js: true do
 
   before do
     @location = create(:location, public: true)

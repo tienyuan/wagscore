@@ -30,6 +30,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'poltergeist'
   gem 'email_spec', '~> 1.6.0'
 end
 

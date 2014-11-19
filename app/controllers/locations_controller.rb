@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  respond_to :html, :js
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -67,6 +68,15 @@ class LocationsController < ApplicationController
     else
       flash[:error] = "Location edit failed. Please try again."
       render :edit 
+    end
+  end
+
+  def flag_location
+    @location = Location.find(params[:location_id])
+    if @location.update_attributes!(flagged: true)
+      respond_with(@location) do |format|
+        format.json { redirect_to @location }
+      end 
     end
   end
 
