@@ -23,7 +23,7 @@ class LocationsController < ApplicationController
 
   def show
     authorize @location
-    @nearby_locations = @location.nearbys(10)
+    @nearby_locations = @location.nearbys(Location.default_search_distance)
     @hash = Gmaps4rails.build_markers(@location) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
