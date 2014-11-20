@@ -3,21 +3,11 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_user
-      if current_user.admin && params[:search_location].present?
-        @locations = Location.near(params[:search_location], params[:distance] || 10)
-      elsif current_user.admin
-        @locations = Location.all
-      elsif params[:search_location].present?
-        @locations = Location.near(params[:search_location], params[:distance] || 10).publicly_viewable
-      else
-        @locations = Location.all.publicly_viewable
-      end
-    elsif params[:search_location].present?
-      @locations = Location.near(params[:search_location], params[:distance] || 10).publicly_viewable
-    else
-      @locations = Location.all.publicly_viewable
-    end
+    @locations = Location.search_and_show(
+        params[:search_location],
+        params[:distance],
+        (current_user.admin if current_user)
+    )
    
     if @locations.present?
       @hash = Gmaps4rails.build_markers(@locations) do |location, marker|

@@ -15,4 +15,16 @@ class Location < ActiveRecord::Base
   def full_address
     [address, city, state, zipcode].compact.join(', ')
   end
+
+  def self.search_and_show(search_term = nil, distance_term = nil, admin_view = nil)
+    if (admin_view if admin_view.present?) && search_term.present?
+      Location.near(search_term, distance_term || 10)
+    elsif (admin_view if admin_view.present?)
+      Location.all
+    elsif search_term.present?
+      Location.near(search_term, distance_term || 10).publicly_viewable
+    else
+      Location.all.publicly_viewable
+    end
+  end
 end

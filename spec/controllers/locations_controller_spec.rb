@@ -37,7 +37,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).not_to include @private_location.description 
     end
 
-    it "shows only public locations to a user", focus: true do
+    it "shows only public locations to a user" do
       sign_in @user
 
       get :index
