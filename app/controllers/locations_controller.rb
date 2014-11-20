@@ -10,12 +10,12 @@ class LocationsController < ApplicationController
     )
    
     if @locations.present?
-      @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+      @map_marker_list = Gmaps4rails.build_markers(@locations) do |location, marker|
         marker.lat location.latitude
         marker.lng location.longitude
         marker.title location.name
       end
-    elsif params[:search_location].present? && @locations.blank?
+    elsif params[:search_location].present?
       flash[:error] = 'No locations found. Please try again.'
       redirect_to root_path
     end
@@ -24,7 +24,7 @@ class LocationsController < ApplicationController
   def show
     authorize @location
     @nearby_locations = @location.nearbys(Location.default_search_distance)
-    @hash = Gmaps4rails.build_markers(@location) do |location, marker|
+    @map_marker_list = Gmaps4rails.build_markers(@location) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
       marker.title location.name
