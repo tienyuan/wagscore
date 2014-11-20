@@ -24,7 +24,7 @@ class LocationsController < ApplicationController
   def show
     authorize @location
     @nearby_locations = @location.nearbys(Location.default_search_distance)
-    @map_marker_list = Gmaps4rails.build_markers(@location) do |location, marker|
+    @map_marker = Gmaps4rails.build_markers(@location) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
       marker.title location.name
@@ -38,7 +38,7 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new(location_params)
+    @location = Location.new(new_location_params)
     authorize @location
     @location.build_submission(submission_params)
     @location.submission.ip_address = request.remote_ip
@@ -88,6 +88,10 @@ class LocationsController < ApplicationController
 
   def submission_params
     params.require(:submission).permit(:email)
+  end
+
+  def new_location_params
+    params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :category_ids => [])
   end
 
   def location_params
