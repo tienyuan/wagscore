@@ -37,7 +37,7 @@
 </p>
 <br/>
 Nearby locations:<br/>
-<% @location.nearbys(10).each do |nearby_location| %>
+<% @nearby_locations.each do |nearby_location| %>
   <%= link_to nearby_location.name, nearby_location %><br/>
 <% end %>
 <br/>
@@ -49,7 +49,7 @@ Nearby locations:<br/>
 <script type="text/javascript">
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    markers = handler.addMarkers(<%=raw @map_marker.to_json %>);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
   });

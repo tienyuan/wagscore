@@ -7,33 +7,88 @@ RSpec.describe LocationsController, :type => :controller do
   describe "#index" do
     render_views
 
-    it "shows only public locations" do
-      public_location = create(:location, public: true)
-      private_location = create(:location)
+    before do
+      @public_location = create(:location, public: true)
+      @private_location = create(:location)
+      @user = create(:user)
+      @admin = create(:user, admin: true)
+    end
+
+    it "shows only public locations to a visitor" do
+      get :index
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:index)
+      expect(Location.count).to eq(2)
+      expect(response.body).to include @public_location.name 
+      expect(response.body).to include @public_location.description
+      expect(response.body).not_to include @private_location.name 
+      expect(response.body).not_to include @private_location.description 
+    end
+
+    it "shows only public locations near a search to a visitor" do
+      params = {search_location: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
+      get :index, params
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:index)
+      expect(Location.count).to eq(2)
+      expect(response.body).to include @public_location.name 
+      expect(response.body).to include @public_location.description
+      expect(response.body).not_to include @private_location.name 
+      expect(response.body).not_to include @private_location.description 
+    end
+
+    it "shows only public locations to a user" do
+      sign_in @user
 
       get :index
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:index)
       expect(Location.count).to eq(2)
-      expect(response.body).to include public_location.name 
-      expect(response.body).to include public_location.description
-      expect(response.body).not_to include private_location.name 
-      expect(response.body).not_to include private_location.description 
+      expect(response.body).to include @public_location.name 
+      expect(response.body).to include @public_location.description
+      expect(response.body).not_to include @private_location.name 
+      expect(response.body).not_to include @private_location.description 
     end
 
-    it "shows only public locations near a search location" do
-      public_location = create(:location, public: true)
-      private_location = create(:location)
+    it "shows only public locations near a search to a user" do
+      sign_in @user
 
       params = {search_location: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
       get :index, params
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:index)
       expect(Location.count).to eq(2)
-      expect(response.body).to include public_location.name 
-      expect(response.body).to include public_location.description
-      expect(response.body).not_to include private_location.name 
-      expect(response.body).not_to include private_location.description 
+      expect(response.body).to include @public_location.name 
+      expect(response.body).to include @public_location.description
+      expect(response.body).not_to include @private_location.name 
+      expect(response.body).not_to include @private_location.description 
+    end
+
+    it "shows all locations to admin" do
+      sign_in @admin
+
+      get :index
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:index)
+      expect(Location.count).to eq(2)
+      expect(response.body).to include @public_location.name 
+      expect(response.body).to include @public_location.description
+      expect(response.body).to include @private_location.name 
+      expect(response.body).to include @private_location.description 
+    end
+
+    it "shows all locations near a search to admin" do
+      sign_in @admin
+
+      params = {search_location: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
+      get :index, params
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:index)
+      expect(Location.count).to eq(2)
+      expect(response.body).to include @public_location.name 
+      expect(response.body).to include @public_location.description
+      expect(response.body).to include @private_location.name 
+      expect(response.body).to include @private_location.description 
     end
   end
 

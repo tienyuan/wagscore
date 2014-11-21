@@ -3,25 +3,19 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:search_location].present?
-      @locations = Location.near(params[:search_location], params[:distance] || 10).publicly_viewable
-    elsif current_user
-      if current_user.admin && params[:search_location].present?
-        @locations = Location.near(params[:search_location], params[:distance] || 10)
-      elsif current_user.admin
-        @locations = Location.all
-      end
-    else
-      @locations = Location.all.publicly_viewable
-    end
+    @locations = Location.search_and_show(
+        params[:search_location],
+        params[:distance],
+        (current_user.admin if current_user)
+    )
    
     if @locations.present?
-      @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+      @map_marker_list = Gmaps4rails.build_markers(@locations) do |location, marker|
         marker.lat location.latitude
         marker.lng location.longitude
         marker.title location.name
       end
-    elsif params[:search_location].present? && @locations.blank?
+    elsif params[:search_location].present?
       flash[:error] = 'No locations found. Please try again.'
       redirect_to root_path
     end
@@ -29,8 +23,8 @@ class LocationsController < ApplicationController
 
   def show
     authorize @location
-    @nearby_locations = @location.nearbys(10)
-    @hash = Gmaps4rails.build_markers(@location) do |location, marker|
+    @nearby_locations = @location.nearbys(Location.default_search_distance)
+    @map_marker = Gmaps4rails.build_markers(@location) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
       marker.title location.name
@@ -44,7 +38,7 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new(location_params)
+    @location = Location.new(new_location_params)
     authorize @location
     @location.build_submission(submission_params)
     @location.submission.ip_address = request.remote_ip
@@ -94,6 +88,10 @@ class LocationsController < ApplicationController
 
   def submission_params
     params.require(:submission).permit(:email)
+  end
+
+  def new_location_params
+    params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :category_ids => [])
   end
 
   def location_params
