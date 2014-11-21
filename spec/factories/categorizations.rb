@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :categorization do
-    category
-    location
+    category { create(:category) }
+    location { create(:location) }
   end
 end

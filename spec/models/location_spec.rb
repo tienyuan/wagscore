@@ -66,10 +66,10 @@ RSpec.describe Location, :type => :model do
       @location_1 = create(:location)
       @location_2 = create(:location)
       @location_3 = create(:location)
-      @categorization = create(:categorization, @category_1, @location_1)
-      @categorization = create(:categorization, @category_2, @location_2)
-      @categorization = create(:categorization, @category_3, @location_3)
-      @categorization = create(:categorization, @category_4, @location_3)
+      @categorization = create(:categorization, category: @category_1, location: @location_1)
+      @categorization = create(:categorization, category: @category_2, location: @location_2)
+      @categorization = create(:categorization, category: @category_3, location: @location_3)
+      @categorization = create(:categorization, category: @category_4, location: @location_3)
     end
     
     it "calculates a score given a list of locations" do
