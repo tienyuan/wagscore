@@ -75,7 +75,7 @@ RSpec.describe Location, :type => :model do
     it "calculates a score given a list of locations" do
       expect([@location_1, @location_2].calculate_score).to eq("50%")
       expect([@location_2, @location_3].calculate_score).to eq("75%")
-      expect([@location_1, @location_2, @location_3].calculate_score).to eq("75%")
+      expect([@location_1, @location_2, @location_3].calculate_score).to eq("100%")
     end
   end
 
