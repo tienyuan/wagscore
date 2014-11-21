@@ -14,6 +14,7 @@ feature "Visitor goes to list", :type => :feature do
     expect(page).to have_content(@public_location.description)
     expect(page).not_to have_content(@private_location.name)
     expect(page).not_to have_content(@private_location.description)
+    expect(page).to have_content("WagScore #{score}")
 
     click_link "#{@public_location.name}"
     expect(page).to have_content(@public_location.description)

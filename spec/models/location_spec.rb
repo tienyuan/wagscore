@@ -13,6 +13,17 @@ RSpec.describe Location, :type => :model do
     end
   end
 
+  describe "publicly_viewable" do
+    before do
+      @public_location = create(:location, public: true)
+      @private_location = create(:location)
+    end
+
+    it "returns a relation of all public locations" do
+      expect(Location.publicly_viewable).to eq( [@public_location] )
+    end
+  end
+
   describe "ActiveModel validations" do
     before do
       @location = create(:location)
