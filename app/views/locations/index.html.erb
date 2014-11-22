@@ -19,9 +19,10 @@
     <% end %>
   </div>
   <div class="col-sm-6 col-md-6">
-  <label></label>
-    <input type="button" value="Search" onclick="geocodeAddressThenSubmit()" class="btn btn-primary">
+    <div class="align-search-btn">
+    <button type="button" onclick="geocodeAddressThenSubmit()" class="btn btn-primary">Search</button>
     <%= link_to "Clear Search", root_path, class: 'btn btn-default' %>
+    </div>
   </div>
 </div>
 
