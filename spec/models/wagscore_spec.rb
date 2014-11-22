@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Wagscore, :type => :model do 
 
-  describe ".calculate(locations)" do
+  describe ".calculate_score(locations)" do
 
     #so it's best if the test works regardless of what categories are present
     #let's say the ideal area has one of each category
