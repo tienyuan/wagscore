@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Wagscore, :type => :model do 
+RSpec.describe Score, :type => :model do 
 
   describe ".calculate_score(locations)" do
 
