@@ -8,6 +8,7 @@ RSpec.describe Category, :type => :model do
     end
 
     it { expect(@category).to validate_presence_of(:name).with_message( /can't be blank/ ) }
+    it { expect(@category).to validate_uniqueness_of(:name) }
   end
 
   describe "ActiveRecord associations" do

@@ -26,7 +26,7 @@ RSpec.describe LocationsController, :type => :controller do
     end
 
     it "shows only public locations near a search to a visitor" do
-      params = {search_location: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
+      params = {address: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
       get :index, params
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:index)
@@ -53,7 +53,7 @@ RSpec.describe LocationsController, :type => :controller do
     it "shows only public locations near a search to a user" do
       sign_in @user
 
-      params = {search_location: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
+      params = {address: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
       get :index, params
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:index)
@@ -80,7 +80,7 @@ RSpec.describe LocationsController, :type => :controller do
     it "shows all locations near a search to admin" do
       sign_in @admin
 
-      params = {search_location: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
+      params = {address: '455 N Rexford Dr, Beverly Hills', distance: '1'} 
       get :index, params
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:index)

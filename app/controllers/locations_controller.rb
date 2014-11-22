@@ -3,8 +3,9 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   def index
+    coordinates = params[:search_location].values if params[:search_location].present?
     @locations = Location.search_and_show(
-        params[:search_location],
+        coordinates,
         params[:distance],
         (current_user.admin if current_user)
     )

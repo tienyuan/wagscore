@@ -30,11 +30,9 @@ feature "Visitor goes to list", :type => :feature do
 
   scenario "as a visitor, searches for public locations near a place" do
     visit root_path
-    fill_in 'search_location', with: "455 N Rexford Dr, Beverly Hills, 90210"
-    select('1 mi', :from => 'distance')
-    within 'form' do
-      click_button 'Search'
-    end
+    fill_in 'address', with: "455 N Rexford Dr, Beverly Hills, 90210"
+    select('1 mile', :from => 'distance')
+    click_button 'Search'
     
     expect(page).to have_content(@public_location.name)
     expect(page).to have_content(@other_location.name)
