@@ -6,11 +6,19 @@ class Score
   end
 
   def self.calculate(location_list)
+    find_unique_categories(location_list).count * category_value
+  end
+
+  def self.find_unique_categories(location_list)
     categories_present = []
-    location_list.each do |location|
-      categories_present << location.categories.name unless categories_present.include?(location.categories.name)
+    if location_list.present?
+      location_list.each do |location|
+        categories_present << location.categories.all
+      end
+      categories_present.flatten.uniq
+    else
+      []
     end
-    categories_present.count * category_value
   end
 
   def self.category_value

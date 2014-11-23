@@ -9,7 +9,9 @@ class LocationsController < ApplicationController
         params[:distance],
         (current_user.admin if current_user)
     )
-   
+
+    @score = Score.calculate(@locations)
+
     if @locations.present?
       @map_marker_list = Gmaps4rails.build_markers(@locations) do |location, marker|
         marker.lat location.latitude
