@@ -2,19 +2,53 @@
 
 Description
 ======================
-This is an locator app that shows you stuff for your dog around town.
-We're also going to show you the *wagscore*, how friendly the ares is for dogs.
+This is an locator app that shows places to take your dog around town.
+We're also going to show you the *WagScore*, which is the dog firendliness of an area.
 
 Made with my mentor at Bloc.
 
 Visit a working copy at [wagscore](http://wagscore.herokuapp.com/)
 
 
-Setup Instructions
-----------------------
+Features
+======================
+* You can search for an area and results are shown and mapped.
+* A score is calculated for search results based on existing categories.
+* Visitors can submit new locations or flag existing locations for review
+* Administrators can review and manage locations
+
+
+Gems include:
+* figaro
+* geocoder
+* gmaps4rails
+* devise
+* pundit
+
+
+Setup
+======================
 Clone this repository. 
 
-Then copy `config/application.example.yml` to `application.yml` and add values. These are the same environment settings needed in production.
+Then copy `config/application.example.yml` to `application.yml` and add values. 
+
+These are the same environment settings needed in production.
+
+```
+SENDGRID_USERNAME: 
+SENDGRID_PASSWORD: 
+
+development:
+  SECRET_KEY_BASE: 
+  DATABASE_USERNAME: 
+  DATABASE_PASSWORD: 
+
+test:
+  SECRET_KEY_BASE: 
+  DATABASE_USERNAME: 
+  DATABASE_PASSWORD:
+
+```
 
 Run `bundle install` to install all relevant gems.
 
