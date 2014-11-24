@@ -24,6 +24,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include @public_location.description
       expect(response.body).not_to include @private_location.name 
       expect(response.body).not_to include @private_location.description 
+      expect(assigns(:locations)).to eq([@public_location])
     end
 
     it "shows only public locations near a search to a visitor" do
@@ -36,6 +37,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include @public_location.description
       expect(response.body).not_to include @private_location.name 
       expect(response.body).not_to include @private_location.description 
+      expect(assigns(:locations)).to eq([@public_location])
     end
 
     it "shows only public locations to a user" do
@@ -49,6 +51,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include @public_location.description
       expect(response.body).not_to include @private_location.name 
       expect(response.body).not_to include @private_location.description 
+      expect(assigns(:locations)).to eq([@public_location])
     end
 
     it "shows only public locations near a search to a user" do
@@ -63,6 +66,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include @public_location.description
       expect(response.body).not_to include @private_location.name 
       expect(response.body).not_to include @private_location.description 
+      expect(assigns(:locations)).to eq([@public_location])
     end
 
     it "shows all locations to admin" do
@@ -76,6 +80,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include @public_location.description
       expect(response.body).to include @private_location.name 
       expect(response.body).to include @private_location.description 
+      expect(assigns(:locations)).to eq([@public_location, @private_location])
     end
 
     it "shows all locations near a search to admin" do
@@ -90,6 +95,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include @public_location.description
       expect(response.body).to include @private_location.name 
       expect(response.body).to include @private_location.description 
+      expect(assigns(:locations)).to eq([@public_location, @private_location])
     end
   end
 
@@ -111,6 +117,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include location.state
       expect(response.body).to include location.zipcode
       expect(response.body).to include near_location.name
+      expect(assigns(:location)).to eq(location)
     end
   end
 
@@ -174,6 +181,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response.body).to include location.longitude.to_s
       expect(response.body).to include location.submission.email
       expect(response.body).to include location.submission.ip_address
+      expect(assigns(:location)).to eq(location)
     end
   end
 
@@ -191,6 +199,7 @@ RSpec.describe LocationsController, :type => :controller do
 
       expect(response).to be_redirect
       expect(@location.name).to eq('new name')
+      expect(assigns(:location)).to eq(@location)
     end
 
     it "fails without a name" do
@@ -222,6 +231,7 @@ RSpec.describe LocationsController, :type => :controller do
 
       expect(response).to be_redirect
       expect(@location.flagged).to be true
+      expect(assigns(:location)).to eq(@location)
     end
   end
 
@@ -235,6 +245,7 @@ RSpec.describe LocationsController, :type => :controller do
       expect(response).to be_redirect
       expect(flash[:notice]).to eq "Location was successfully deleted."
       expect(Location.count).to eq(0)
+      expect(assigns(:location)).to eq(location)
     end
   end
 end

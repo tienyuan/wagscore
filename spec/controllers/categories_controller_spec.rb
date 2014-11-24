@@ -21,6 +21,7 @@ RSpec.describe CategoriesController, :type => :controller do
       expect(response).to render_template(:index)
       expect(response.body).to include category.name 
       expect(Category.count).to eq(1)
+      expect(assigns(:categories)).to eq([category])
     end
 
     it "redirects user" do
