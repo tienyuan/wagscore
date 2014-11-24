@@ -4,6 +4,7 @@ feature "Admin edits a location", :type => :feature do
 
   before do
     @admin = create(:user, admin: true)
+    @category = create(:category, name: 'Category')
     @location = create(:location, public: true)
     @submission = create(:submission, location: @location)
   end
@@ -21,6 +22,7 @@ feature "Admin edits a location", :type => :feature do
     fill_in 'City', with: "Metropolis"
     fill_in 'State', with: "CA"
     fill_in 'Zipcode', with: "12345"
+    check 'Category'
     check 'Flagged'
     within 'form' do
       click_button 'Update Location'
@@ -36,6 +38,7 @@ feature "Admin edits a location", :type => :feature do
     expect(last_location.city).to eq('Metropolis')
     expect(last_location.state).to eq('CA')
     expect(last_location.zipcode).to eq('12345')
+    expect(last_location.categories).to eq([@category])
     expect(last_location.flagged).to eq true
   end
 

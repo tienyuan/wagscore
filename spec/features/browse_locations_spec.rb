@@ -6,15 +6,16 @@ feature "Visitor goes to list", :type => :feature do
     @public_location = create(:location, public: true)
     @private_location = create(:location)
     @other_location = create(:location, public: true)
+    @category = create(:category)
   end
 
-  xscenario "as a visitor, sees public locations" do
+  scenario "as a visitor, sees public locations" do
     visit root_path
     expect(page).to have_content(@public_location.name)
     expect(page).to have_content(@public_location.description)
     expect(page).not_to have_content(@private_location.name)
     expect(page).not_to have_content(@private_location.description)
-    expect(page).to have_content("WagScore 0%")
+    expect(page).to have_content("0% WagScore")
 
     click_link "#{@public_location.name}"
     expect(page).to have_content(@public_location.description)

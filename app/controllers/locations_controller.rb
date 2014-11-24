@@ -11,8 +11,8 @@ class LocationsController < ApplicationController
         distance_term: params[:distance],
         include_private: (current_user.admin if current_user)
     )
-
-    @score = Score.calculate(@locations)
+    
+    @score = Score.calculate(@locations).to_i
   
     if @locations.present?
       @map_marker_list = Gmaps4rails.build_markers(@locations) do |location, marker|

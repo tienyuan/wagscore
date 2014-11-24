@@ -8,6 +8,7 @@ feature "Visitor signs up", :type => :feature do
   before do
     reset_mailer
     set_auth
+    create(:category)
   end
 
   scenario "with valid email and password" do

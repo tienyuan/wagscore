@@ -3,6 +3,8 @@ require 'rails_helper'
 feature "Visitor creates a location", :type => :feature do
 
   scenario "with valid info" do
+    category = create(:category, name: 'Category')
+
     visit root_path
     click_link "Submit a Location"
     expect(page).to have_content("Submit a Location")
@@ -14,6 +16,7 @@ feature "Visitor creates a location", :type => :feature do
     fill_in 'City', with: "Metropolis"
     fill_in 'State', with: "CA"
     fill_in 'Zipcode', with: "12345"
+    check 'Category'
     fill_in 'Email', with: "test@email.com"
     within 'form' do
       click_button 'Create Location'
@@ -30,6 +33,7 @@ feature "Visitor creates a location", :type => :feature do
     expect(last_location.city).to eq('Metropolis')
     expect(last_location.state).to eq('CA')
     expect(last_location.zipcode).to eq('12345')
+    expect(last_location.categories).to eq([category])
     expect(last_location.public).to eq false
     expect(last_location.submission).to eq(last_submission)
     expect(last_submission.ip_address). to eq('127.0.0.1') 

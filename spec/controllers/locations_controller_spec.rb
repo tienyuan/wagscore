@@ -8,6 +8,7 @@ RSpec.describe LocationsController, :type => :controller do
     render_views
 
     before do
+      @category = create(:category)
       @public_location = create(:location, public: true)
       @private_location = create(:location)
       @user = create(:user)

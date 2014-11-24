@@ -3,6 +3,7 @@ require 'rails_helper'
 feature "Admin creates a category", :type => :feature do
 
   scenario "with valid info" do
+    category = create(:category)
     set_auth
     admin = create(:user, admin: true)
     login_as(admin, :scope => :user)
