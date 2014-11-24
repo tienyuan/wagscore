@@ -20,7 +20,7 @@ Wagscore Home
       </div>
     <% end %>
     <div class="align-search-btn">
-    <button type="button" onclick="geocodeAddressThenSubmit()" class="btn btn-primary">Search</button>
+    <button type="button" onclick="wagscore.geocodeAddressThenSubmit()" class="btn btn-primary">Search</button>
     <%= link_to "New Search", root_path, class: 'btn btn-default' %>    
     </div>
   </div>
@@ -78,5 +78,5 @@ Wagscore Home
     handler.fitMapToBounds();
   });
 
- initialize();
+ wagscore.initialize();
 </script>

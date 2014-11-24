@@ -3,7 +3,9 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   def index
-    coordinates = params[:search_location].values if params[:search_location].present?
+    search_location = params[:search_location]
+    coordinates = search_location.values if search_location.present?
+    
     @locations = Location.search(
         search_term: coordinates,
         distance_term: params[:distance],
@@ -18,7 +20,7 @@ class LocationsController < ApplicationController
         marker.lng location.longitude
         marker.title location.name
       end
-    elsif params[:search_location].present?
+    elsif search_location.present?
       flash[:error] = 'No locations found. Please try again.'
       redirect_to root_path
     end

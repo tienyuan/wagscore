@@ -1,10 +1,11 @@
 
-var client_geocoder;
-function initialize() {
-  client_geocoder = new google.maps.Geocoder();
-}
+var wagscore = {};
 
-function geocodeAddressThenSubmit() {
+wagscore.initialize = function () {
+  client_geocoder = new google.maps.Geocoder();
+};
+
+wagscore.geocodeAddressThenSubmit = function() {
   var address = document.getElementById('address').value;
   client_geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
@@ -15,4 +16,4 @@ function geocodeAddressThenSubmit() {
       alert('Search was not successful for the following reason: ' + status);
     }
   });
-}
+};
