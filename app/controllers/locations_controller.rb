@@ -4,10 +4,10 @@ class LocationsController < ApplicationController
 
   def index
     coordinates = params[:search_location].values if params[:search_location].present?
-    @locations = Location.search_and_show(
-        coordinates,
-        params[:distance],
-        (current_user.admin if current_user)
+    @locations = Location.search(
+        search_term: coordinates,
+        distance_term: params[:distance],
+        include_private: (current_user.admin if current_user)
     )
 
     @score = Score.calculate(@locations)

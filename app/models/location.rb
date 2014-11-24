@@ -20,10 +20,10 @@ class Location < ActiveRecord::Base
     10 #miles
   end
 
-  def self.search_and_show(search_term = nil, distance_term = nil, admin_view = nil)
-    if (admin_view if admin_view.present?) && search_term.present?
+  def self.search(search_term: nil, distance_term: nil, include_private: nil)
+    if (include_private if include_private.present?) && search_term.present?
       Location.near(search_term, distance_term || Location.default_search_distance)
-    elsif (admin_view if admin_view.present?)
+    elsif (include_private if include_private.present?)
       Location.all
     elsif search_term.present?
       Location.near(search_term, distance_term || Location.default_search_distance).publicly_viewable

@@ -29,22 +29,22 @@ RSpec.describe Location, :type => :model do
     end
   end
 
-  describe ".search_and_show(search_term, distance_term, admin_view)" do
+  describe ".search(search_term, distance_term, include_private)" do
     before do
       @public_location = create(:location, public: true)
       @private_location = create(:location)
     end
 
-    it "returns all locations when admin_view is true" do
-      expect(Location.search_and_show(nil, nil, true)).to contain_exactly(@public_location, @private_location)
+    it "returns all locations when include_private is true" do
+      expect(Location.search(search_term: nil, distance_term: nil, include_private: true)).to contain_exactly(@public_location, @private_location)
     end
 
     it "returns nearby locations when search_term and distance_term is present" do
-      expect(Location.search_and_show(@public_location.full_address, 10, nil)).to contain_exactly(@public_location)
+      expect(Location.search(search_term: @public_location.full_address, distance_term: 10, include_private: nil)).to contain_exactly(@public_location)
     end
 
-    it "returns all locations near a search_term when admin_view is true" do
-      expect(Location.search_and_show(@public_location.full_address, 10, true)).to contain_exactly(@public_location, @private_location)
+    it "returns all locations near a search_term when include_private is true" do
+      expect(Location.search(search_term: @public_location.full_address, distance_term: 10, include_private: true)).to contain_exactly(@public_location, @private_location)
     end
   end  
 
