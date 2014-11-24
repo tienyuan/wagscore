@@ -1,4 +1,8 @@
-<h1>New location</h1>
+<% @page_title = capture do %>
+Submit a Location - Wagscore
+<% end %>
+
+<h1>Submit a Location</h1>
 
 <%= form_for(@location) do |f| %>
   <% if @location.errors.any? %>
