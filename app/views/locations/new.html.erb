@@ -2,7 +2,9 @@
 Submit a Location - Wagscore
 <% end %>
 
+<div class="col-sm-6 col-md-6">
 <h1>Submit a Location</h1>
+<p class="text-danger">* required</p>
 
 <%= form_for(@location) do |f| %>
   <% if @location.errors.any? %>
@@ -17,49 +19,49 @@ Submit a Location - Wagscore
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name %>*<br>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.text_field :url, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
+  <div class="form-group">
+    <%= f.label :address %>*<br>
+    <%= f.text_field :address, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :city %><br>
-    <%= f.text_field :city %>
+    <%= f.text_field :city, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :state %><br>
-    <%= f.text_field :state %>
+    <%= f.text_field :state, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :zipcode %><br>
-    <%= f.text_field :zipcode %>
+    <%= f.text_field :zipcode, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
+  <div class="checkbox">
+    <p><b>Choose Category</b> *</p>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| 
+       b.label(class: "checkbox") { b.check_box + b.text}
+    end %>
   </div>
   <%= fields_for(:submission) do |s| %>
-    <div class="field">
-      <%= s.label :email %><br>
-      <%= s.email_field :email %>
+    <div class="form-group">
+      <%= s.label :email %>* <br>
+      <%= s.email_field :email, class: 'form-control' %>
     </div>
-    
   <% end %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
+  <%= f.submit class: "btn btn-primary" %> <%= link_to 'Back', locations_path, class: 'btn btn-default' %>
 <% end %>
+</div>
 
-
-<%= link_to 'Back', locations_path %>
