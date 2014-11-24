@@ -23,24 +23,21 @@ $headings-font-family: 'Dosis';
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-body{
-  font-family: 'Lato', sans-serif;
-}
-
 .navbar-brand {
-  font-family: 'Dosis', sans-serif;
   font-weight: 800;
   font-size: 24px;
   color: #fff;
 }
+
 h1, h2, h3, h4 {
-  font-family: 'Dosis', sans-serif;
   font-weight: 800;
 }
+
 .align-search-btn {
   margin-bottom: 20px; 
   margin-left: -15px
 }
+
 .wagscore {
   background-image: url(asset-path('weinersays.png')); 
   background-repeat: no-repeat; 
