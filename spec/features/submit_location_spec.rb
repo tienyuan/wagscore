@@ -19,19 +19,21 @@ feature "Visitor creates a location", :type => :feature do
       click_button 'Create Location'
     end
 
+    last_location = Location.last
+    last_submission = Submission.last
     expect(current_path).to eq(root_path)
     expect(page).to have_content('Location successfully submitted.')
-    expect(Location.last.name).to eq('Dog Vet')
-    expect(Location.last.description).to eq('We treat dogs')
-    expect(Location.last.url).to eq('vet.com')
-    expect(Location.last.address).to eq('123 Main Street')
-    expect(Location.last.city).to eq('Metropolis')
-    expect(Location.last.state).to eq('CA')
-    expect(Location.last.zipcode).to eq('12345')
-    expect(Location.last.public).to eq false
-    expect(Location.last.submission).to eq(Submission.last)
-    expect(Submission.last.ip_address). to eq('127.0.0.1') 
-    expect(Submission.last.email). to eq('test@email.com')
-    expect(Submission.last.location). to eq(Location.last)
+    expect(last_location.name).to eq('Dog Vet')
+    expect(last_location.description).to eq('We treat dogs')
+    expect(last_location.url).to eq('vet.com')
+    expect(last_location.address).to eq('123 Main Street')
+    expect(last_location.city).to eq('Metropolis')
+    expect(last_location.state).to eq('CA')
+    expect(last_location.zipcode).to eq('12345')
+    expect(last_location.public).to eq false
+    expect(last_location.submission).to eq(last_submission)
+    expect(last_submission.ip_address). to eq('127.0.0.1') 
+    expect(last_submission.email). to eq('test@email.com')
+    expect(last_submission.location). to eq(last_location)
   end
 end
