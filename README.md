@@ -3,7 +3,7 @@
 Description
 ======================
 This is an locator app that shows places to take your dog around town.
-We're also going to show you the *WagScore*, which is the dog firendliness of an area.
+We're also going to show you the *WagScore*, which is the dog friendliness of an area.
 
 Made with my mentor at Bloc.
 
@@ -14,8 +14,8 @@ Features
 ======================
 * You can search for an area and results are shown and mapped.
 * A score is calculated for search results based on existing categories.
-* Visitors can submit new locations or flag existing locations for review
-* Administrators can review and manage locations
+* Visitors can submit new locations or flag existing locations for review.
+* Administrators can review and manage locations.
 
 
 Gems include:
