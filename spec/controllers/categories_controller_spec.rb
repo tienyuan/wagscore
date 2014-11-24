@@ -19,8 +19,8 @@ RSpec.describe CategoriesController, :type => :controller do
       get :index
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:index)
-      expect(Category.count).to eq(1)
       expect(response.body).to include category.name 
+      expect(Category.count).to eq(1)
     end
 
     it "redirects user" do
@@ -89,6 +89,7 @@ RSpec.describe CategoriesController, :type => :controller do
 
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:edit)
+      expect(assigns(:category)).to eq(category)
     end
   end
 
@@ -105,6 +106,7 @@ RSpec.describe CategoriesController, :type => :controller do
 
       expect(response).to be_redirect
       expect(@category.name).to eq('new name')
+      expect(assigns(:category)).to eq(@category)
     end
 
     it "fails without a name" do
