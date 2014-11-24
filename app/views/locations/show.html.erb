@@ -7,7 +7,11 @@
 
 <%= link_to 'Back', root_path %>
 
-<h3><%= @location.name %></h3>
+<h3><%= @location.name %>
+    <% if !@location.public %> 
+      <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+    <% end %>
+</h3>
 
 <p>
   <strong>Description:</strong><br/>

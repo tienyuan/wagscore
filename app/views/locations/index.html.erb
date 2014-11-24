@@ -47,15 +47,21 @@ Wagscore Home
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail">
             <div class="caption">
-              <h4><%= link_to location.name, location %></h4>
+              <h4><%= link_to location.name, location %>
+                  <% if !location.public %> 
+                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                  <% end %>
+              </h4>
               <p><%= location.description %></p> 
               <% location.categories.each do |category| %>
                 <span class="label label-default"><%= category.name %></span>
               <% end %>
               
               <% if current_user && current_user.admin %>
-                <%= link_to 'Edit', edit_location_path(location) %> /
-                <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <p>
+                  <%= link_to 'Edit', edit_location_path(location) %> /
+                  <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </p>
               <% end %>
             </div>
           </div>

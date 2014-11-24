@@ -31,7 +31,7 @@ class CategoriesController < ApplicationController
   def update
     authorize @category
     if @category.update(category_params)
-      redirect_to @category, notice: 'Category was successfully updated.'
+      redirect_to categories_path, notice: 'Category was successfully updated.'
     else
       flash[:error] = "Category edit failed. Please try again."
       render :edit

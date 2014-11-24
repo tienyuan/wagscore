@@ -3,13 +3,13 @@ require 'rails_helper'
 feature "Admin edits a location", :type => :feature do
 
   before do
-    @user = create(:user, admin: true)
+    @admin = create(:user, admin: true)
     @location = create(:location, public: true)
     @submission = create(:submission, location: @location)
   end
 
   scenario "edit location with valid info" do
-    signs_in_with(@user.email, @user.password)
+    signs_in_with(@admin.email, @admin.password)
 
     visit root_path
     click_link "#{@location.name}"
@@ -26,20 +26,21 @@ feature "Admin edits a location", :type => :feature do
       click_button 'Update Location'
     end
     
+    last_location = Location.last
     expect(current_path).to eq(location_path(@location))
     expect(page).to have_content('Location was successfully updated.')
-    expect(Location.last.name).to eq('Dog Vet')
-    expect(Location.last.description).to eq('We treat dogs')
-    expect(Location.last.url).to eq('vet.com')
-    expect(Location.last.address).to eq('123 Main Street')
-    expect(Location.last.city).to eq('Metropolis')
-    expect(Location.last.state).to eq('CA')
-    expect(Location.last.zipcode).to eq('12345')
-    expect(Location.last.flagged).to eq true
+    expect(last_location.name).to eq('Dog Vet')
+    expect(last_location.description).to eq('We treat dogs')
+    expect(last_location.url).to eq('vet.com')
+    expect(last_location.address).to eq('123 Main Street')
+    expect(last_location.city).to eq('Metropolis')
+    expect(last_location.state).to eq('CA')
+    expect(last_location.zipcode).to eq('12345')
+    expect(last_location.flagged).to eq true
   end
 
   scenario "deletes location with valid info" do
-    signs_in_with(@user.email, @user.password)
+    signs_in_with(@admin.email, @admin.password)
 
     visit root_path
     click_link "#{@location.name}"
