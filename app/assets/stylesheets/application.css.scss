@@ -13,20 +13,39 @@
  *= require_tree .
  *= require_self
  */
+
+$navbar-inverse-bg: #31B0D5;
+$navbar-inverse-link-color: #fff;
+$navbar-inverse-link-hover-color: #FFE168;
+$font-family-base: 'Lato';
+$headings-font-family: 'Dosis';
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+.navbar-brand {
+  font-weight: 800;
+  font-size: 24px;
+  color: #fff;
+}
+h1, h2, h3, h4 {
+  font-weight: 800;
+}
 .align-search-btn {
   margin-bottom: 20px; 
-  margin-left: -10px
+  margin-left: -15px
 }
 .wagscore {
   background-image: url(asset-path('weinersays.png')); 
   background-repeat: no-repeat; 
-  background-position: 31% 0%; 
+  background-position: 35% 0%; 
   height: 200px;
 
   h3 { 
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-style: italic;
   margin: 0px;
   }
 
@@ -34,6 +53,7 @@
   position: relative; 
   left: 0%; 
   top: 42%; 
+  background-color: #fff;
   border: 1px solid #ccc; 
   border-radius: 10px; 
   padding: 15px; 

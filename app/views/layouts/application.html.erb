@@ -2,29 +2,39 @@
 <html>
 <head>
   <title><%= @page_title %></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Dosis:400,700,800|Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <div class="navbar navbar-default navbar-static-top" role="navigation">
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="container">
-      <div class="navbar-header">        
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>        
         <%= link_to "WagScore", root_path, class: 'navbar-brand' %>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li>  
             <%= link_to 'Submit a Location', new_location_path %>
           </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
           <li>  
             <%= link_to 'About', about_path %>
           </li>
           <% if current_user %>
             <% if current_user.admin %>
-            <li>
-              <%= link_to "Manage Categories", categories_path %>
-            </li>
+              <li>
+                <%= link_to "Manage Categories", categories_path %>
+              </li>
             <% end %>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
@@ -35,7 +45,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </nav>
   <div class="container">
   <div class="nav-spacer"></div>
     <% if flash[:notice] %>
