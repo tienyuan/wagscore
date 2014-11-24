@@ -29,7 +29,7 @@ RSpec.describe Location, :type => :model do
     end
   end
 
-  describe ".search(search_term, distance_term, include_private)" do
+  describe ".search(search_term:, distance_term:, include_private:)" do
     before do
       @public_location = create(:location, public: true)
       @private_location = create(:location)

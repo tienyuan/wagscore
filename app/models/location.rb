@@ -21,14 +21,17 @@ class Location < ActiveRecord::Base
   end
 
   def self.search(search_term: nil, distance_term: nil, include_private: nil)
-    if (include_private if include_private.present?) && search_term.present?
-      Location.near(search_term, distance_term || Location.default_search_distance)
-    elsif (include_private if include_private.present?)
-      Location.all
-    elsif search_term.present?
-      Location.near(search_term, distance_term || Location.default_search_distance).publicly_viewable
+     if search_term.present?
+      distance_in_miles = distance_term || Location.default_search_distance
+      results = near(search_term, distance_in_miles)
     else
-      Location.all.publicly_viewable
+      results = all
     end
+
+    if !include_private
+      results = results.publicly_viewable
+    end
+
+    results
   end
 end
