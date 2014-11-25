@@ -54,7 +54,7 @@ Wagscore Home
               </h4>
               <p><%= location.description %></p> 
               <% location.categories.each do |category| %>
-                <span class="label label-default"><%= category.name %></span>
+                <span class="label label-<%= category.id %>"><%= category.name %></span>
               <% end %>
               
               <% if current_user && current_user.admin %>

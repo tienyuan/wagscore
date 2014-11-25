@@ -19,42 +19,47 @@ Edit a Location - Wagscore
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :address %><br>
-    <%= f.text_field :address %>
+    <%= f.text_field :address, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :city %><br>
-    <%= f.text_field :city %>
+    <%= f.text_field :city, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :state %><br>
-    <%= f.text_field :state %>
+    <%= f.text_field :state, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :zipcode %><br>
-    <%= f.text_field :zipcode %>
+    <%= f.text_field :zipcode, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :public %><br>
-    <%= f.check_box :public %>
+    <%= f.label :description %><br>
+    <%= f.text_field :description, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :flagged %><br>
-    <%= f.check_box :flagged %>
+    <%= f.label :url %>
+    <%= f.text_field :url, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
+  <div class="checkbox">
+    <%= f.label :public, class: 'checkbox' do %>
+    <%= f.check_box :public %> Public
+    <% end %>
+  </div>
+  <div class="checkbox">
+    <%= f.label :flagged, class: 'checkbox' do %>
+    <%= f.check_box :flagged %> Flagged
+    <% end %>
+  </div>
+  <div class="checkbox">
+    <b>Choose Category</b> *
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| 
+       b.label(class: "checkbox") { b.check_box + b.text}
+    end %>
   </div>
   <div class="field">
   Coordinates:
@@ -62,14 +67,14 @@ Edit a Location - Wagscore
   <%= @location.longitude %>
   </div>
   <div class="field">
-  Submitted by: <%= @location.submission.email %>
-  IP: <%= @location.submission.ip_address %>
+  Submitted by: <%= @location.submission.email %><br/>
+  IP: <%= @location.submission.ip_address %><br/><br/>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>
 
-
+<br/>
 <%= link_to 'Show', @location %> |
 <%= link_to 'Back', locations_path %>

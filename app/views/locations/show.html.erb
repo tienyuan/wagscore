@@ -12,7 +12,13 @@
       <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
     <% end %>
 </h3>
-
+<p>
+  <strong>Address:</strong>
+  <address>
+    <%= @location.address %><br>
+    <%= @location.city %>, <%= @location.state %> <%= @location.zipcode %><br>
+  </address>
+</p>
 <p>
   <strong>Description:</strong><br/>
   <%= @location.description %>
@@ -23,19 +29,14 @@
   <%= @location.url %>
 </p>
 <p>
-  <strong>Address:</strong><br/>
-  <address>
-    <%= @location.address %><br>
-    <%= @location.city %>, <%= @location.state %> <%= @location.zipcode %><br>
-  </address>
   <% @location.categories.each do |category| %>
-    <%= category.name %><br/>
+    <span class="label label-<%= category.id %>"><%= category.name %></span>
   <% end %>
   <div id="flag-status">
   <% if !@location.flagged %>
-    <%= link_to 'Flag', location_location_flagged_path(location_id: @location.id), method: :post, remote: true %>
+    <%= link_to 'Flag for Review', location_location_flagged_path(location_id: @location.id), method: :post, remote: true, class: 'btn btn-default', data: { confirm: 'Are you sure?' } %>
   <% else %>
-    Flagged for review
+    <b>Flagged for review</b>
   <% end %>
   </div>
   <% if current_user && current_user.admin %>

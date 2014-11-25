@@ -24,14 +24,6 @@ Submit a Location - Wagscore
     <%= f.text_field :name, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :description %><br>
-    <%= f.text_field :description, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :url %><br>
-    <%= f.text_field :url, class: 'form-control' %>
-  </div>
-  <div class="form-group">
     <%= f.label :address %>*<br>
     <%= f.text_field :address, class: 'form-control' %>
   </div>
@@ -47,6 +39,14 @@ Submit a Location - Wagscore
     <%= f.label :zipcode %><br>
     <%= f.text_field :zipcode, class: 'form-control' %>
   </div>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :url %><br>
+    <%= f.text_field :url, class: 'form-control' %>
+  </div>
 
   <div class="checkbox">
     <p><b>Choose Category</b> *</p>
@@ -58,6 +58,7 @@ Submit a Location - Wagscore
     <div class="form-group">
       <%= s.label :email %>* <br>
       <%= s.email_field :email, class: 'form-control' %>
+      <span id="helpBlock" class="help-block">Your email will not be published, and will only be used for questions.</span>
     </div>
   <% end %>
   
