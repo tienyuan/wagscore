@@ -6,6 +6,9 @@ RSpec.describe Location, :type => :model do
     before do
       @public_location = create(:location, public: true)
       @private_location = create(:location)
+      # category = create(:category)
+      # categorization_1 = create(:categorization, category, @public_location)
+      # categorization_1 = create(:categorization, category, @public_location)
     end
 
     it "returns a relation of all public locations" do
