@@ -61,4 +61,3 @@ Screenshots
 ![Home Page](http://tienyuan.github.io/wagscore/img/home.png)
 ![When You Search](http://tienyuan.github.io/wagscore/img/search.png)
 ![Submission Page](http://tienyuan.github.io/wagscore/img/submission.png)
-![Admin View](http://tienyuan.github.io/wagscore/img/admin.png)
