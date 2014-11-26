@@ -21,7 +21,8 @@ Wagscore Home
     <% end %>
     <div class="align-search-btn">
     <button type="button" onclick="wagscore.geocodeAddressThenSubmit()" class="btn btn-primary">Search</button>
-    <%= link_to "New Search", root_path, class: 'btn btn-default' %>    
+    <button type="button" onclick="wagscore.useMyLocation()" class="btn btn-default">Use My Location</button>
+    <%= link_to "New Search", root_path, class: 'btn btn-default' %>   
     </div>
   </div>
   <div class="col-sm-6 col-md-6">
@@ -79,4 +80,5 @@ Wagscore Home
   });
 
  wagscore.initialize();
+ 
 </script>
