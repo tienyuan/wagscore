@@ -7,8 +7,8 @@ We're also going to show you the *WagScore*, which is the dog friendliness of an
 
 Made with my mentor at Bloc.
 
-Visit a working copy at [wagscore](http://wagscore.herokuapp.com/)
-
+Visit a working copy at [wagscore](http://wagscore.herokuapp.com/).
+Try searching for 'UCLA' or 'Cal State LA' within '2 miles'.
 
 Features
 ======================
@@ -53,3 +53,12 @@ test:
 Run `bundle install` to install all relevant gems.
 
 Run `rspec/spec` to test the application.
+
+
+Screenshots
+====================
+
+![Home Page](tienyuan.github.io/wagscore/img/home.png)
+![When You Search](tienyuan.github.io/wagscore/img/search.png)
+![Submission Page](tienyuan.github.io/wagscore/img/submission.png)
+![Admin View](tienyuan.github.io/wagscore/img/admin.png)
