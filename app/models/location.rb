@@ -6,6 +6,7 @@ class Location < ActiveRecord::Base
 
   validates :name, presence: true
   validates :address, presence: true
+  validates :categories, presence: true
 
   geocoded_by :full_address
   after_validation :geocode if :address.present? && :address_changed?

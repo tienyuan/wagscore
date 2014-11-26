@@ -5,17 +5,11 @@ RSpec.describe Score, :type => :model do
   describe ".calculate(locations)" do
 
     before do
-      category_1 = create(:category, name: 'one')
-      category_2 = create(:category, name: 'two')
-      category_3 = create(:category, name: 'three')
-      category_4 = create(:category, name: 'four')
+      extra_category = create(:category, name: 'extra')
       location_1 = create(:location)
       location_2 = create(:location)
       location_3 = create(:location)
-      categorization = create(:categorization, category: category_1, location: location_1)
-      categorization = create(:categorization, category: category_2, location: location_2)
-      categorization = create(:categorization, category: category_3, location: location_3)
-      categorization = create(:categorization, category: category_4, location: location_3)
+      categorization = create(:categorization, category: extra_category, location: location_3)
       @collection_1 = [location_1]
       @collection_2 = [location_1, location_2]
       @collection_3 = [location_3]
