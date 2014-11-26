@@ -79,4 +79,18 @@ Wagscore Home
   });
 
  wagscore.initialize();
+
+ if (geoPosition.init()) {
+  geoPosition.getCurrentPosition(geoSuccess, geoError);
+  }
+
+  function geoSuccess(p) {
+    $('#search_location_lat').val(p.coords.latitude);
+    $('#search_location_lng').val(p.coords.longitude);
+    $('#search_form').submit();
+  }
+
+  function geoError() {
+    alert("We could not automatically find your location. Please search for a place.");
+  }
 </script>
