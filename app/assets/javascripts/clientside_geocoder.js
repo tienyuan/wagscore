@@ -17,3 +17,18 @@ wagscore.geocodeAddressThenSubmit = function() {
     }
   });
 };
+
+wagscore.useMyLocation = function() {
+  geoPosition.init();
+  geoPosition.getCurrentPosition(wagscore.geoSuccess, wagscore.geoError);
+};
+
+wagscore.geoSuccess = function(p) {
+  $('#search_location_lat').val(p.coords.latitude);
+  $('#search_location_lng').val(p.coords.longitude);
+  $('#search_form').submit();
+};
+
+wagscore.geoError = function() {
+  alert("We could not automatically find your location. Please search for a place.");
+};
