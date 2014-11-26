@@ -21,7 +21,8 @@ Wagscore Home
     <% end %>
     <div class="align-search-btn">
     <button type="button" onclick="wagscore.geocodeAddressThenSubmit()" class="btn btn-primary">Search</button>
-    <%= link_to "New Search", root_path, class: 'btn btn-default' %>    
+    <button type="button" onclick="useMyLocation()" class="btn btn-default">Use My Location</button>
+    <%= link_to "New Search", root_path, class: 'btn btn-default' %>   
     </div>
   </div>
   <div class="col-sm-6 col-md-6">
@@ -80,15 +81,14 @@ Wagscore Home
 
  wagscore.initialize();
  
- var timesRun;
- if (geoPosition.init() && timesRun < 1) {
-  geoPosition.getCurrentPosition(geoSuccess, geoError);
+  function useMyLocation() {
+    geoPosition.init();
+    geoPosition.getCurrentPosition(geoSuccess, geoError);
   }
 
   function geoSuccess(p) {
     $('#search_location_lat').val(p.coords.latitude);
     $('#search_location_lng').val(p.coords.longitude);
-    timesRun++;
     $('#search_form').submit();
   }
 
