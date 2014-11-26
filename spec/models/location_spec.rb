@@ -4,11 +4,9 @@ RSpec.describe Location, :type => :model do
 
   describe "publicly_viewable scope" do
     before do
+      category = create(:category)
       @public_location = create(:location, public: true)
       @private_location = create(:location)
-      # category = create(:category)
-      # categorization_1 = create(:categorization, category, @public_location)
-      # categorization_1 = create(:categorization, category, @public_location)
     end
 
     it "returns a relation of all public locations" do
@@ -58,7 +56,7 @@ RSpec.describe Location, :type => :model do
 
     it { expect(@location).to validate_presence_of(:name).with_message( /can't be blank/ ) }
     it { expect(@location).to validate_presence_of(:address).with_message( /can't be blank/ ) }
-    xit { expect(@location).to validate_presence_of(:categories).with_message( /can't be blank/ ) }
+    it { expect(@location).to validate_presence_of(:categories).with_message( /can't be blank/ ) }
   end
 
   describe "ActiveRecord associations" do
