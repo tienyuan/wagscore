@@ -5,7 +5,7 @@ Description
 This is an locator app that shows places to take your dog around town.
 We're also going to show you the *WagScore*, which is the dog friendliness of an area.
 
-Made with my mentor at Bloc.
+Made with my mentor, [Eliot Sykes](https://www.bloc.io/mentors/eliot-sykes) at Bloc.
 
 Visit a working copy at [wagscore](http://wagscore.herokuapp.com/).
 Try searching for 'UCLA' or 'Cal State LA' within '2 miles'.
