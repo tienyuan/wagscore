@@ -1,5 +1,4 @@
 module AuthHelpers
-
   def set_auth
     Warden.test_mode!
   end

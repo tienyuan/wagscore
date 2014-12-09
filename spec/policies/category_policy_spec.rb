@@ -10,31 +10,31 @@ describe CategoryPolicy do
   end
 
   permissions :index? do
-    it "denies access if user is not an admin" do
+    it 'denies access if user is not an admin' do
       expect(subject).not_to permit(@user, @category)
     end
 
-    it "grants access if user is admin" do
+    it 'grants access if user is admin' do
       expect(subject).to permit(@admin, @category)
     end
   end
 
   permissions :create? do
-    it "denies access if user is not an admin" do
+    it 'denies access if user is not an admin' do
       expect(subject).not_to permit(@user, @category)
     end
 
-    it "grants access if user is admin" do
+    it 'grants access if user is admin' do
       expect(subject).to permit(@admin, @category)
     end
   end
 
   permissions :update? do
-    it "denies access if user is not an admin" do
+    it 'denies access if user is not an admin' do
       expect(subject).not_to permit(@user, @category)
     end
 
-    it "grants access if user is admin" do
+    it 'grants access if user is admin' do
       expect(subject).to permit(@admin, @category)
     end
   end

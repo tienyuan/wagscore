@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Admin edits a location", :type => :feature do
+feature 'Admin edits a location', type: :feature do
 
   before do
     @admin = create(:user, admin: true)
@@ -9,25 +9,25 @@ feature "Admin edits a location", :type => :feature do
     @submission = create(:submission, location: @location)
   end
 
-  scenario "edit location with valid info" do
+  scenario 'edit location with valid info' do
     signs_in_with(@admin.email, @admin.password)
 
     visit root_path
     click_link "#{@location.name}"
-    click_link "Edit"
-    fill_in 'Name', with: "Dog Vet"
-    fill_in 'Description', with: "We treat dogs"
-    fill_in 'Url', with: "vet.com"
-    fill_in 'Address', with: "123 Main Street"
-    fill_in 'City', with: "Metropolis"
-    fill_in 'State', with: "CA"
-    fill_in 'Zipcode', with: "12345"
+    click_link 'Edit'
+    fill_in 'Name', with: 'Dog Vet'
+    fill_in 'Description', with: 'We treat dogs'
+    fill_in 'Url', with: 'vet.com'
+    fill_in 'Address', with: '123 Main Street'
+    fill_in 'City', with: 'Metropolis'
+    fill_in 'State', with: 'CA'
+    fill_in 'Zipcode', with: '12345'
     check 'Category Name'
     check 'Flagged'
     within 'form' do
       click_button 'Update Location'
     end
-    
+
     last_location = Location.last
     expect(current_path).to eq(location_path(@location))
     expect(page).to have_content('Location was successfully updated.')
@@ -42,13 +42,13 @@ feature "Admin edits a location", :type => :feature do
     expect(last_location.flagged).to eq true
   end
 
-  scenario "deletes location with valid info" do
+  scenario 'deletes location with valid info' do
     signs_in_with(@admin.email, @admin.password)
 
     visit root_path
     click_link "#{@location.name}"
-    click_link "Destroy"
-    
+    click_link 'Destroy'
+
     expect(current_path).to eq(locations_path)
     expect(page).to have_content('Location was successfully deleted.')
     expect(Location.count).to eq(0)
@@ -64,5 +64,4 @@ feature "Admin edits a location", :type => :feature do
       click_button 'Sign in'
     end
   end
-
 end

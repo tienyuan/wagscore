@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Visitor goes to list", :type => :feature do
+feature 'Visitor goes to list', type: :feature do
 
   before do
     @public_location = create(:location, public: true)
@@ -9,13 +9,13 @@ feature "Visitor goes to list", :type => :feature do
     @category = create(:category)
   end
 
-  scenario "as a visitor, sees public locations" do
+  scenario 'as a visitor, sees public locations' do
     visit root_path
     expect(page).to have_content(@public_location.name)
     expect(page).to have_content(@public_location.description)
     expect(page).not_to have_content(@private_location.name)
     expect(page).not_to have_content(@private_location.description)
-    expect(page).to have_content("0% WagScore")
+    expect(page).to have_content('0% WagScore')
 
     click_link "#{@public_location.name}"
     expect(page).to have_content(@public_location.description)
@@ -29,12 +29,12 @@ feature "Visitor goes to list", :type => :feature do
     expect(page).not_to have_content(@public_location.longitude)
   end
 
-  scenario "as a visitor, searches for public locations near a place" do
+  scenario 'as a visitor, searches for public locations near a place' do
     visit root_path
-    fill_in 'address', with: "455 N Rexford Dr, Beverly Hills, 90210"
-    select('1 mile', :from => 'distance')
+    fill_in 'address', with: '455 N Rexford Dr, Beverly Hills, 90210'
+    select('1 mile', from: 'distance')
     click_button 'Search'
-    
+
     expect(page).to have_content(@public_location.name)
     expect(page).to have_content(@other_location.name)
     expect(page).not_to have_content(@private_location.name)
