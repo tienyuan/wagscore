@@ -18,18 +18,18 @@ class Location < ActiveRecord::Base
   end
 
   def self.default_search_distance
-    10 #miles
+    10 # miles
   end
 
   def self.search(search_term: nil, distance_term: nil, include_private: nil)
-     if search_term.present?
+    if search_term.present?
       distance_in_miles = distance_term || Location.default_search_distance
       results = near(search_term, distance_in_miles)
     else
       results = all
     end
 
-    if !include_private
+    unless include_private
       results = results.publicly_viewable
     end
 

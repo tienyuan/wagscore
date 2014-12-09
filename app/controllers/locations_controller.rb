@@ -5,15 +5,15 @@ class LocationsController < ApplicationController
   def index
     search_location = params[:search_location]
     coordinates = search_location.values if search_location.present?
-    
+
     @locations = Location.search(
         search_term: coordinates,
         distance_term: params[:distance],
         include_private: (current_user.admin if current_user)
     )
-    
+
     @score = Score.calculate(@locations)
-  
+
     if @locations.present?
       @map_marker_list = Gmaps4rails.build_markers(@locations) do |location, marker|
         marker.lat location.latitude
@@ -62,11 +62,11 @@ class LocationsController < ApplicationController
 
   def update
     authorize @location
-    if @location.update(location_params) 
+    if @location.update(location_params)
       redirect_to @location, notice: 'Location was successfully updated.'
     else
-      flash[:error] = "Location edit failed. Please try again."
-      render :edit 
+      flash[:error] = 'Location edit failed. Please try again.'
+      render :edit
     end
   end
 
@@ -76,7 +76,7 @@ class LocationsController < ApplicationController
     if @location.update_attributes!(flagged: true)
       respond_with(@location) do |format|
         format.json { redirect_to @location }
-      end 
+      end
     end
   end
 
@@ -87,6 +87,7 @@ class LocationsController < ApplicationController
   end
 
   private
+
   def set_location
     @location = Location.find(params[:id])
   end
@@ -96,10 +97,10 @@ class LocationsController < ApplicationController
   end
 
   def new_location_params
-    params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :category_ids => [])
+    params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, category_ids: [])
   end
 
   def location_params
-    params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :public, :flagged, :category_ids => [])
+    params.require(:location).permit(:name, :description, :url, :address, :city, :state, :zipcode, :public, :flagged, category_ids: [])
   end
 end

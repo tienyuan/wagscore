@@ -23,7 +23,7 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_path, notice: 'Category was successfully created.'
     else
-      flash[:error] = "Category submission failed. Please try again."
+      flash[:error] = 'Category submission failed. Please try again.'
       render :new
     end
   end
@@ -33,7 +33,7 @@ class CategoriesController < ApplicationController
     if @category.update(category_params)
       redirect_to categories_path, notice: 'Category was successfully updated.'
     else
-      flash[:error] = "Category edit failed. Please try again."
+      flash[:error] = 'Category edit failed. Please try again.'
       render :edit
     end
   end
